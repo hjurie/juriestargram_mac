@@ -10,7 +10,4 @@ class UsersConfig(AppConfig):
             Users system checks
             Users signal registration
         """
-        try:
-            import users.signals  # noqa F401
-        except ImportError:
-            pass
+        pass

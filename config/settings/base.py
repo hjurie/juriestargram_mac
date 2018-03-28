@@ -39,7 +39,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///juriestargram'),
+    'default': env.db('DATABASE_URL', default='postgres://postgres:1q2w3e@localhost:5433/juriestargram'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -67,11 +67,20 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_framework',
+    'allauth.socialaccount.providers.facebook',  # registration
+    'rest_framework',  # REST framework API
+    'rest_framework.authtoken',
+    'taggit', # Tags for the photos
+    'taggit_serializer', # Tag serializer
+    'rest_auth', # rest auth
+    'rest_auth.registration',  # enble registration
+    'corsheaders', # To accept requests from React
 ]
 LOCAL_APPS = [
     'juriestargram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'juriestargram.images.apps.ImagesConfig', # images app
+    'juriestargram.notifications.apps.NotificationsConfig', # notifications app
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -130,6 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -238,3 +248,27 @@ SOCIALACCOUNT_ADAPTER = 'juriestargram.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+TAGGIT_CASE_INSENSITIVE =True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
+
+REST_USE_JWT = True
+ACCOUNT_LOGOUT_ON_GET = True
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+CORS_ORIGINALLOW_ALL  = True
+
+JWT_AUTH = {
+    'JWT_VERIFY_EXPIRATION': False
+}
