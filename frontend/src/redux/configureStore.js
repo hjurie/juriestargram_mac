@@ -29,6 +29,7 @@ let store;
 if(env === "development"){
     store = initialState =>
         Reactotron.createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
+        //createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
 }
 else{
     store = initialState =>
