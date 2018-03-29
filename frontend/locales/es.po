@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Language: es"
+
+#: src/components/Auth/presenter.js
+msgid "계정이 없으신가요?"
+msgstr "Ya tienes una cuenta?"
+
+#: src/components/Auth/presenter.js
+msgid "가입하기"
+msgstr ""
+
+#: src/components/Auth/presenter.js
+msgid "계정이 있으신가요?"
+msgstr ""
+
+#: src/components/Auth/presenter.js
+#: src/components/AuthForms/index.js
+msgid "로그인"
+msgstr "Don't"
+
+#: src/components/Auth/presenter.js
+msgid "앱을 다운로드하세요."
+msgstr ""
+
+#: src/components/Auth/presenter.js
+msgid "App Store에서 다운로드 하기"
+msgstr ""
+
+#: src/components/Auth/presenter.js
+msgid "다운로드하기 Google Play"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "이름"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "비밀번호"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "비밀번호를 잊으셨나요?"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "친구들의 사진과 동영상을 보려면 가입하세요."
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "Facebook으로 로그인"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "또는"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "이메일"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "가입"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "가입하면 Instagram의"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "약관 및 개인정보처리방침"
+msgstr ""
+
+#: src/components/AuthForms/index.js
+msgid "에 동의하게 됩니다."
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "Instagram 정보"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "지원"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "블로그"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "홍보 센터"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "API"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "채용 정보"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "개인정보처리방침"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "약관"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "디렉터리"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "프로필"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "해시태그"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "언어"
+msgstr ""
+
+#: src/components/Footer/index.js
+msgid "About Us"
+msgstr ""
+

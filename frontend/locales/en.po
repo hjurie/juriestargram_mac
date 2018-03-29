@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Language: en"
+
+#: src/components/Auth/presenter.js
+msgid "계정이 없으신가요?"
+msgstr "Don't have an account?"
+
+#: src/components/Auth/presenter.js
+msgid "가입하기"
+msgstr ""
+
+#: src/components/Auth/presenter.js
+msgid "계정이 있으신가요?"
+msgstr "Have an account?"
+
+#: src/components/Auth/presenter.js
+#: src/components/AuthForms/index.js
+msgid "로그인"
+msgstr "Login"
+
+#: src/components/Auth/presenter.js
+msgid "앱을 다운로드하세요."
+msgstr "Get the app."
+
+#: src/components/Auth/presenter.js
+msgid "App Store에서 다운로드 하기"
+msgstr "Download on the App Store"
+
+#: src/components/Auth/presenter.js
+msgid "다운로드하기 Google Play"
+msgstr "GET IT ON Google Play"
+
+#: src/components/AuthForms/index.js
+msgid "이름"
+msgstr "Username"
+
+#: src/components/AuthForms/index.js
+msgid "비밀번호"
+msgstr "Password"
+
+#: src/components/AuthForms/index.js
+msgid "비밀번호를 잊으셨나요?"
+msgstr "Forgot password?"
+
+#: src/components/AuthForms/index.js
+msgid "친구들의 사진과 동영상을 보려면 가입하세요."
+msgstr "Sign up to see photos and videos from your friends."
+
+#: src/components/AuthForms/index.js
+msgid "Facebook으로 로그인"
+msgstr "Log in with Facebook"
+
+#: src/components/AuthForms/index.js
+msgid "또는"
+msgstr "or"
+
+#: src/components/AuthForms/index.js
+msgid "이메일"
+msgstr "Email"
+
+#: src/components/AuthForms/index.js
+msgid "가입"
+msgstr "Sign up"
+
+#: src/components/AuthForms/index.js
+msgid "가입하면 Instagram의"
+msgstr "By signing up"
+
+#: src/components/AuthForms/index.js
+msgid "약관 및 개인정보처리방침"
+msgstr "Terms & Privacy Policy."
+
+#: src/components/AuthForms/index.js
+msgid "에 동의하게 됩니다."
+msgstr "you agree to our"
+
+#: src/components/Footer/index.js
+msgid "Instagram 정보"
+msgstr "About Us"
+
+#: src/components/Footer/index.js
+msgid "지원"
+msgstr "Support"
+
+#: src/components/Footer/index.js
+msgid "블로그"
+msgstr "Blog"
+
+#: src/components/Footer/index.js
+msgid "홍보 센터"
+msgstr "Press"
+
+#: src/components/Footer/index.js
+msgid "API"
+msgstr "API"
+
+#: src/components/Footer/index.js
+msgid "채용 정보"
+msgstr "Jobs"
+
+#: src/components/Footer/index.js
+msgid "개인정보처리방침"
+msgstr "Privacy"
+
+#: src/components/Footer/index.js
+msgid "약관"
+msgstr "Terms"
+
+#: src/components/Footer/index.js
+msgid "디렉터리"
+msgstr "Directory"
+
+#: src/components/Footer/index.js
+msgid "프로필"
+msgstr "Profiles"
+
+#: src/components/Footer/index.js
+msgid "해시태그"
+msgstr "Hashtags"
+
+#: src/components/Footer/index.js
+msgid "언어"
+msgstr "Language"
+
+#: src/components/Footer/index.js
+msgid "About Us"
+msgstr ""
+
