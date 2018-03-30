@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import LoginForm from "./presenter";
 
 class Container extends Component {
@@ -7,11 +8,16 @@ class Container extends Component {
         password: ""
     };
 
+    static propTypes = {
+        usernameLogin: PropTypes.func.isRequired
+    }
+
     render() {
         const { username, password } = this.state;
         return <LoginForm 
                     handleInputChange={this._handleInputChange} 
-                    handleSubmit={this._handleSubmit}
+                    handleSubmit={this._handleSubmit} 
+                    handleUsernameLogin={this._handleUsernameLogin} 
                     usernameValue={username} 
                     passwordValue={password}/>;
     };
@@ -27,9 +33,17 @@ class Container extends Component {
     };
     
     _handleSubmit = event => {
+        const { usernameLogin } = this.props;
+        const { username, password } = this.state;
         event.preventDefault();
+        usernameLogin(username, password);
         console.log(this.state);
         // redux will action
+    }
+
+    _handleUsernameLogin = response => {
+        const { usernameLogin } = this.props;
+        usernameLogin(response.token)
     }
 }
 

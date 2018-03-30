@@ -11,7 +11,8 @@ class Container extends Component {
     };
 
     static propTypes = {
-        facebookLogin: PropTypes.func.isRequired
+        facebookLogin: PropTypes.func.isRequired,
+        createAccount: PropTypes.func.isRequired
     }
 
     render(){
@@ -20,6 +21,7 @@ class Container extends Component {
                     handleInputChange={this._handleInputChange} 
                     handleSubmit={this._handleSubmit} 
                     handleFacebookLogin={this._handleFacebookLogin} 
+                    handleCreateAccount={this._handleCreateAccount} 
                     emailValue={email} 
                     nameValue={name} 
                     usernameValue={username} 
@@ -38,14 +40,22 @@ class Container extends Component {
     };
 
     _handleSubmit = event => {
+        const { createAccount } = this.props;
+        const { username, password, email, name } = this.state;
         event.preventDefault();
+        createAccount(username, password, email, name);
         console.log(this.state);
         // redux will action
     };
 
     _handleFacebookLogin = response => {
         const { facebookLogin } = this.props;
-        facebookLogin(response.accessToken)
+        facebookLogin(response.accessToken);
+    }
+
+    _handleCreateAccount = response => {
+        const { createAccount } = this.props;
+        createAccount(response.token);
     }
 
 }

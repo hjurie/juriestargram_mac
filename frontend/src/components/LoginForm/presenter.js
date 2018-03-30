@@ -21,7 +21,10 @@ const LoginForm = (props, context) => (
                 onChange={props.handleInputChange}
                 name="password"
             />
-            <input type="submit" value={context.t("로그인")} className={formStyles.button} />
+            <input type="submit" 
+                value={context.t("로그인")} 
+                className={formStyles.button} 
+            />
         </form>
         <span className={formStyles.forgotLink}>{context.t("비밀번호를 잊으셨나요?")}</span>
     </div>
