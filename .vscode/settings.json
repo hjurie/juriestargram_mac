@@ -1,3 +1,4 @@
 {
-    "python.formatting.provider": "autopep8"
+    "python.formatting.provider": "autopep8",
+    "python.pythonPath": "/Users/jurie/.local/share/virtualenvs/juriestargram-PSQ94ral/bin/python"
 }

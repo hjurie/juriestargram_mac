@@ -43,6 +43,7 @@ django-rest-auth = "*"
 
 [dev-packages]
 
+pylint = "*"
 
 
 [requires]
