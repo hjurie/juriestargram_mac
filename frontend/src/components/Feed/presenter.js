@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import formStyles from "./styles.scss";
+import styles from "./styles.scss";
 
 
-const Feed = (props, context) => {
+const Feed = props => "Feed!";
 
+Feed.propTypes = {
+    loading: PropTypes.bool.isRequired
 }
-
-
 
 export default Feed;
