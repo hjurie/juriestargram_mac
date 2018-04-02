@@ -1,5 +1,6 @@
 //imports
 
+import { actionCreators as userActions } from "redux/modules/user";
 
 // actions
 
@@ -15,7 +16,13 @@ function getFeed(){
                 "Authorization": `JWT ${token}` 
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 401){
+                console.log('dddddddddd' + response.status)
+                dispatch(userActions.logout());
+            } 
+            return response.json();
+        })
         .then(json => console.log(json))
     }
 }
