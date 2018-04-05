@@ -69,16 +69,12 @@ class LikeImage(APIView):
         
         likes = models.Like.objects.filter(image__id=image_id)
 
-        print(likes)
-        print(likes.values('creator_id'))
-
         like_creators_ids = likes.values('creator_id')
 
         users = user_models.User.objects.filter(id__in=like_creators_ids)
 
-        print(users)
-
-        serializer = user_serializers.ListUserSerializer(users, many=True)
+        serializer = user_serializers.ListUserSerializer(
+            users, many=True, context={'request': request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -107,30 +103,26 @@ class LikeImage(APIView):
             )
 
             new_like.save()
-
-            notification_views.create_notification(user, found_image.creator, 'like', found_image)
+            
+            notification_views.create_notification(
+                user, found_image.creator, 'like', found_image)
 
             return Response(status=status.HTTP_201_CREATED)
 
 
 class UnLikeImage(APIView):
 
-    def delete(self, request, comment_id, format=None):
+    def delete(self, request, image_id, format=None):
 
         user = request.user
 
         try:
-            found_image = models.Image.objects.get(id=image_id)
-
-        except models.Image.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        try:
             preexisiting_like = models.Like.objects.get(
                 creator=user,
-                image=found_image
+                image__id=image_id
             )
             preexisiting_like.delete()
+
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         except models.Like.DoesNotExist:
@@ -244,7 +236,7 @@ class ImageDetail(APIView):
 
         image = self.find_own_image(image_id, user)
 
-        if image is not None:
+        if image is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)
@@ -260,12 +252,12 @@ class ImageDetail(APIView):
 
 
     def delete(self, request, image_id, format=None):
-        
+
         user = request.user
         
         image = self.find_own_image(image_id, user)
 
-        if image is not None:
+        if image is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
         image.delete()

@@ -33,8 +33,14 @@ class FeedUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = user_models.User
         fields = (
+            'profile_image',
             'username',
-            'profile_image'
+            'name',
+            'bio',
+            'website',
+            'post_count',
+            'followers_count',
+            'following_count',
         )
 
 
@@ -92,7 +98,13 @@ class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):
                 return False
         return False
 
+class LikeSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = models.Like
+        fields = (
+            'creator',
+        )
 
 
 class InputImageSerializer(serializers.ModelSerializer):
