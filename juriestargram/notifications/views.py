@@ -31,7 +31,7 @@ def create_notification(creator, to, notification_type, image=None, comment=None
         comment=comment
     )
 
-    time.sleep(1)
+    # time.sleep(10)
 
     notification.save()
     
