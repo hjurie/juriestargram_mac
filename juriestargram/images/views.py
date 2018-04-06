@@ -103,7 +103,7 @@ class LikeImage(APIView):
             )
 
             new_like.save()
-            
+
             notification_views.create_notification(
                 user, found_image.creator, 'like', found_image)
 

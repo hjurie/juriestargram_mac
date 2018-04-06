@@ -14,7 +14,7 @@ class ExploreUsers(APIView):
 
         last_five = models.User.objects.all().order_by('-date_joined')[:5]
 
-        serializer = serializers.ListUserSerializer(last_five, many=True)
+        serializer = serializers.ListUserSerializer(last_five, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -116,7 +116,7 @@ class UserFollowers(APIView):
 
         user_followers = found_user.followers.all()
 
-        serializer = serializers.ListUserSerializer(user_followers, many=True)
+        serializer = serializers.ListUserSerializer(user_followers, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -132,7 +132,7 @@ class UserFollowing(APIView):
 
         user_following = found_user.following.all()
 
-        serializer = serializers.ListUserSerializer(user_following, many=True)
+        serializer = serializers.ListUserSerializer(user_following, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -146,7 +146,7 @@ class Search(APIView):
         if username is not None:
             users = models.User.objects.filter(username__istartswith=username)
 
-            serializer = serializers.ListUserSerializer(users, many=True)
+            serializer = serializers.ListUserSerializer(users, many=True, context={"request": request})
 
             return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -204,3 +204,24 @@ class ChangePassword(APIView):
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
+
+
+class RegisterPush(APIView):
+
+    def post(self, request):
+
+        user = request.user
+
+        token = request.data.get('token', None)
+
+        if token is not None:
+
+            user.push_token = token
+
+            user.save()
+
+            return Response(status=status.HTTP_200_OK)
+
+        else:
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)

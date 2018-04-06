@@ -58,6 +58,7 @@ function likePhoto(photoId){
         console.log('라이크')
         dispatch(doLikePhoto(photoId));
         const { user: { token } } = getState();
+        console.log(`${token}`)
         fetch(`/images/${photoId}/likes/`, {
             method: "POST",
             headers: {

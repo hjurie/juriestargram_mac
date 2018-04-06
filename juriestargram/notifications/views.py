@@ -31,10 +31,10 @@ def create_notification(creator, to, notification_type, image=None, comment=None
         comment=comment
     )
 
-    time.sleep(10)
+    time.sleep(1)
 
     notification.save()
-
+    
     action = ''
 
     if notification_type == 'like':
@@ -49,7 +49,6 @@ def create_notification(creator, to, notification_type, image=None, comment=None
 
         action = 'followed you'
         
-
     url = "https://exp.host/--/api/v2/push/send"
     data = {
         "to": creator.push_token,
