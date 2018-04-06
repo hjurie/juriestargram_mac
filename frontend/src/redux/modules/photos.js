@@ -55,10 +55,8 @@ function getFeed(){
 
 function likePhoto(photoId){
     return (dispatch, getState) => {
-        console.log('라이크')
         dispatch(doLikePhoto(photoId));
         const { user: { token } } = getState();
-        console.log(`${token}`)
         fetch(`/images/${photoId}/likes/`, {
             method: "POST",
             headers: {
@@ -66,8 +64,6 @@ function likePhoto(photoId){
             }
         })
         .then(response => {
-            console.log("response:")
-            console.log(response)
             if(response.status === 401){
                 dispatch(userActions.logout());
             }
@@ -90,8 +86,6 @@ function unlikePhoto(photoId) {
             }
         })
         .then(response => {
-            console.log("response:")
-            console.log(response)
             if (response.status === 401) {
                 dispatch(userActions.logout());
             }
@@ -100,6 +94,27 @@ function unlikePhoto(photoId) {
             }
         });
     };
+}
+
+function commentPhoto(photoId, message){
+    return (dispatch, getState) => {
+        const { user: { token } } = getState();
+        fetch(`/images/${photoId}/comments/`, {
+            method: "POST",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message
+            })
+        })
+        .then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+        })
+    }
 }
 
 
@@ -163,7 +178,8 @@ function applyUnlikePhoto(state, action) {
 const actionCreators = {
     getFeed,
     likePhoto,
-    unlikePhoto
+    unlikePhoto,
+    commentPhoto
 }
 
 export { actionCreators }
