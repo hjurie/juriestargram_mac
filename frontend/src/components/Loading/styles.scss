@@ -1,5 +1,6 @@
 .container{
     .spinner{
+        width: 32px;
         height: 32px;
         animation: spinner 1.2s steps(12) infinite;
     }
