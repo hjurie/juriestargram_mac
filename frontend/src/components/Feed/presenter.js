@@ -9,7 +9,7 @@ const Feed = props => {
     if(props.loading){
         return <LoadingFeed loading={props.loading} />
     } 
-    else if ( props.feed){
+    else if (props.feed){
         return <RenderFeed {...props} />
     }
 }

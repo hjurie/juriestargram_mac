@@ -3,8 +3,6 @@ import Container from "./container";
 import { actionCreators as photoActions } from "redux/modules/photos";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    console.log(ownProps);
-
     return {
         handleHeartClick: () => {
             if(ownProps.isLiked){

@@ -9,7 +9,7 @@ import photos from 'redux/modules/photos';
 // import Reactotron from "ReactotronConfig";
 
 const env = process.env.NODE_ENV;
-console.log(`env : ${env}`);
+
 const history = createHistory()
 
 const middlewares = [thunk, routerMiddleware(history)]; 
@@ -27,7 +27,7 @@ const reducer = combineReducers({
 });
 
 let store;
-console.log(`store : ${store}`);
+
 if(env === "development"){
     store = initialState =>
         // Reactotron.createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)));
@@ -38,7 +38,6 @@ else{
         createStore(reducer, applyMiddleware(...middlewares));
 }
 
-console.log(`store : ${store}`);
 
 
 export { history };

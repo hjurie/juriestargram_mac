@@ -9,7 +9,6 @@ import UserList from "components/UserList";
 
 
 const FeedPhoto = (props, context) => {
-    console.log(props)
     return (
         <div className={styles.feedPhoto}>
             <header className={styles.header}>
