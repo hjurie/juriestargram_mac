@@ -20,14 +20,17 @@ const Notification = (props, context) => {
 }
 
 
-
 const RenderNotification = props => (
-    <div>
-        {props.notifiList.map(user => <UserDisplay big={true} horizontal={true} user={user.creator} key={user.creator.id} />)}
+    <div className={styles.notification}>
+        {props.notifiList.map(notifiList => <UserDisplay big={false} horizontal={true} user={notifiList.creator} notifiList={notifiList} key={notifiList.id} />)}
     </div>
 )
 
-const RenderLoading = (props) => <Loading loading={props.loading} />
+const RenderLoading = (props) => (
+    <div className={styles.loading}>
+        <Loading loading={props.loading} />
+    </div>
+)
 
 
 Notification.propTypes = {

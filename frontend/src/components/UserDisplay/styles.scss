@@ -24,15 +24,25 @@
         color: $dark-grey;
       }
     }
+    .notification {
+      margin-left: 10px;
+      font-size: 12px;
+      strong {
+        font-weight: bold;
+      }
+    }
     .bigAvatar {
       width: 55px;
+      height: 55px;
       border-radius: 50%;
     }
     .avatar {
       width: 30px;
+      height: 30px;
       border-radius: 50%;
     }
     .button {
+      min-width: 67px;
       @include blueButton();
     }
   }

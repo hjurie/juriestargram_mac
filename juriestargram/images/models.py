@@ -10,6 +10,10 @@ class TimeStampedModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
 
     class Meta:
         abstract = True
@@ -32,12 +36,6 @@ class Image(TimeStampedModel):
     @property
     def comment_count(self):
         return self.comments.all().count()
-
-
-    @property
-    def natural_time(self):
-        return naturaltime(self.created_at)
-
 
 
     def __str__(self):

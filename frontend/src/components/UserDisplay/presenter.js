@@ -11,10 +11,27 @@ const UserDisplay = (props, context) => (
                 alt={props.user.username}
                 className={props.big ? styles.bigAvatar : styles.avatar}
             />
-            <div className={styles.user}>
-                <span className={styles.username}>{props.user.username}</span>
-                <span className={styles.name}>{props.user.name}</span>
-            </div>
+            {props.notifiList ? (
+                <div className={styles.notification}>
+                    {props.notifiList.notification_type === "comment" && (
+                        <div>코멘트 자리</div>
+                    )}
+                    {props.notifiList.notification_type === "follow" && (
+                        <div>
+                            <strong>{props.user.username}</strong> 
+                            {context.t("님이 팔로우하기 시작했습니다.")}
+                        </div>
+                    )}
+                    {props.notifiList.notification_type === "like" && (
+                        <div>좋아요 자리</div>
+                    )}
+                </div>
+            ):(
+                <div className={styles.user}>
+                    <span className={styles.username}>{props.user.username}</span>
+                    <span className={styles.name}>{props.user.name}</span>
+                </div>
+            )}
         </div>
         <span className={styles.column} onClick={props.handleClick}>
                 <button className={styles.button}>
@@ -34,9 +51,14 @@ UserDisplay.propTypes = {
         following: PropTypes.bool.isRequired
 
     }).isRequired,
+    notifiList: PropTypes.shape({
+        to: PropTypes.string.isRequired,
+        notification_type: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+    }).isRequired,
     big: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired
-
 }
 
 UserDisplay.contextTypes = {

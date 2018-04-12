@@ -8,5 +8,7 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = (
         'creator',
         'to',
-        'notification_type'
+        'notification_type',
+        'created_at',
+        'updated_at',
     )
