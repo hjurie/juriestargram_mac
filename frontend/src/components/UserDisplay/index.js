@@ -3,9 +3,6 @@ import Container from "./container";
 import { actionCreators as userAction } from "redux/modules/user";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    console.log(`[@////////////${ownProps.user.id}ownProps/////////////]`)
-    console.log(ownProps)
-    console.log(`[#////////////${ownProps.user.id}ownProps/////////////]`)
     const { user } = ownProps;
     console.log(`[@////////////${user.id}user/////////////]`)
     console.log(user)

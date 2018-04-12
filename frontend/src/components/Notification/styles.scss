@@ -1,0 +1,13 @@
+.contents-wrap {
+    position: relative;
+    .pop-wrap {
+        display: flex;
+        position: absolute;
+        right: -60px;
+        width: $max-notifi-width;
+        min-height: 200px;
+        justify-content: center;
+        align-items: center;
+        @include boxBorder(yes);
+    }
+}

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
 
-const UserRow = (props, context) => (
-    <div className={styles.container}>
+const UserDisplay = (props, context) => (
+    <div className={props.horizontal ? styles.horizontal : styles.vertical}>
         <div className={styles.column}>
             <img
                 src={props.user.profile_image || require("images/noPhoto.jpg")}
@@ -18,14 +18,14 @@ const UserRow = (props, context) => (
         </div>
         <span className={styles.column} onClick={props.handleClick}>
                 <button className={styles.button}>
-                   {props.user.following ? context.t("Unfollow") : context.t("Follow")}
+                   {props.user.following ? context.t("언팔로우") : context.t("팔로우")}
                 </button>
         </span>
     </div>
 );
 
 
-UserRow.propTypes = {
+UserDisplay.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number.isRequired,
         profile_image: PropTypes.string.isRequired,
@@ -39,13 +39,13 @@ UserRow.propTypes = {
 
 }
 
-UserRow.contextTypes = {
+UserDisplay.contextTypes = {
     t: PropTypes.func.isRequired
 }
 
-UserRow.defaultProps = {
+UserDisplay.defaultProps = {
     big: false
 }
 
 
-export default UserRow;
+export default UserDisplay;

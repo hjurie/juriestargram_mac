@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 import Loading from "components/Loading";
 import Ionicon from "react-ionicons";
-import UserRow from "components/UserRow";
+import UserDisplay from "components/UserDisplay";
 
 
 const UserList = props => (
@@ -25,7 +25,7 @@ const UserList = props => (
 
 
 const RenderUsers = props => 
-    props.list.map(user => <UserRow user={user} key={user.id} /> )
+    props.list.map(user => <UserDisplay user={user} key={user.id} /> )
 
 
 

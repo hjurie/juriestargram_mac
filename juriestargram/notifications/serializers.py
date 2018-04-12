@@ -3,8 +3,8 @@ from . import models
 from juriestargram.users import serializers as user_serializers
 from juriestargram.images import serializers as image_serializers
 
-class NotificationsSerializer(serializers.ModelSerializer):
-    
+class NotificationSerializer(serializers.ModelSerializer):
+
     creator = user_serializers.ListUserSerializer()
     image = image_serializers.SmallImageSerializer()
 

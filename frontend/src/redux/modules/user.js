@@ -7,8 +7,8 @@ const LOGOUT = "LOGOUT";
 const SET_USER_LIST = "SET_USER_LIST";
 const FOLLOW_USER = "FOLLOW_USER";
 const UNFOLLOW_USER = "UNFOLLOW_USER";
-
-
+const SET_IMAGE_LIST = "SET_IMAGE_LIST"
+const SET_NOTIFI_LIST = "SET_NOTIFI_LIST"
 
 // action creators
 
@@ -48,6 +48,19 @@ function setUserList(userList){
     }
 }
 
+function setImageList(imageList){
+    return {
+        type: SET_IMAGE_LIST,
+        imageList
+    }
+}
+
+function setNotification(notifiList){
+    return {
+        type: SET_NOTIFI_LIST,
+        notifiList
+    }
+}
 
 
 // API actions
@@ -203,7 +216,8 @@ function getExplore(){
                 Authorization: `JWT ${token}`,
                 "Content-Type": "application/json"
             }
-        }).then(response => {
+        })
+        .then(response => {
             if (response.status === 401) {
                 dispatch(logout());
             }
@@ -211,6 +225,73 @@ function getExplore(){
         })
         .then(json => dispatch(setUserList(json)))
     };
+}
+
+function getNotification(){
+    return async(dispatch, getState) => {
+        const { user: { token } } = getState();
+        console.log("/////////notification////////")
+        console.log(token)
+        await fetch(`/notifications/`, {
+            method: "GET",
+            headers: {
+                Authorization: `JWT ${token}`,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            console.log(response)
+            if (response.status === 401) {
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => dispatch(setNotification(json)))
+    }
+}
+
+function searchByTerm(searchTerm){
+    return async(dispatch, getState) => {
+        const { user : { token } } = getState();
+        const userList = await searchUsers(token, searchTerm);
+        const imageList = await searchImages(token, searchTerm);
+        if(userList === 401 || imageList === 401){
+            dispatch(logout());
+        }
+        dispatch(setUserList(userList));
+        dispatch(setImageList(imageList));
+    }
+}
+
+function searchUsers(token, searchTerm){
+    return fetch(`/users/search/?username=${searchTerm}`, {
+        headers: {
+            Authorization: `JWT ${token}`,
+        }
+    })
+    .then(response => {
+        if(response.status === 401){
+            return 401
+        }
+        return response.json()
+    })
+    .then(json => json);
+}
+
+
+function searchImages(token, searchTerm) {
+    return fetch(`/images/search/?hashtags=${searchTerm}`, {
+        headers: {
+            Authorization: `JWT ${token}`,
+        }
+    })
+    .then(response => {
+        if (response.status === 401) {
+            return 401
+        }
+        return response.json()
+    })
+    .then(json => json);
 }
 
 
@@ -235,6 +316,10 @@ function reducer(state = initialState, action){
             return applyFollowUser(state, action);
         case UNFOLLOW_USER:
             return applyUnfollowUser(state, action);
+        case SET_IMAGE_LIST : 
+            return applySetImageList(state, action);
+        case SET_NOTIFI_LIST :
+            return applySetNotifiList(state, action)
         default: 
             return state;
     }
@@ -298,6 +383,22 @@ function applyUnfollowUser(state, action) {
     }
 }
 
+function applySetImageList(state, action) {
+    const { imageList } = action;
+    return {
+        ...state,
+        imageList
+    }
+}
+
+function applySetNotifiList(state, action) {
+    const { notifiList } = action;
+    return {
+        ...state,
+        notifiList
+    }
+}
+
 
 
 // exports
@@ -310,7 +411,9 @@ const actionCreators = {
     getPhotoLikes,
     followUser,
     unfollowUser,
-    getExplore
+    getExplore,
+    getNotification,
+    searchByTerm
 };
 
 export { actionCreators };
