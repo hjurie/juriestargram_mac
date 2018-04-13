@@ -230,8 +230,6 @@ function getExplore(){
 function getNotification(){
     return async(dispatch, getState) => {
         const { user: { token } } = getState();
-        console.log("/////////notification////////")
-        console.log(token)
         await fetch(`/notifications/`, {
             method: "GET",
             headers: {
@@ -246,7 +244,17 @@ function getNotification(){
             }
             return response.json()
         })
-        .then(json => dispatch(setNotification(json)))
+        .then(json => {
+            dispatch(setNotification(json))
+            const userList = json.map(notifiList => {
+                if (notifiList.notification_type === "follow") {
+
+                    return { ...notifiList.creator };
+                }
+                return undefined
+            }).filter(n => { return n !== undefined });
+            dispatch(setUserList(userList))
+        })
     }
 }
 

@@ -11,4 +11,5 @@ class NotificationAdmin(admin.ModelAdmin):
         'notification_type',
         'created_at',
         'updated_at',
+        'natural_time'
     )

@@ -4,11 +4,13 @@ import { actionCreators as userActions } from "redux/modules/user"
 
 const mapStateToProps = (state, ownProps) => {
     const { user: { notifiList } } = state;
+    const { user: { userList } } = state;
+    
     return {
-        notifiList
+        notifiList,
+        userList
     }
 }
-
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -17,7 +19,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

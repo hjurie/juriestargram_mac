@@ -4,9 +4,6 @@ import { actionCreators as userAction } from "redux/modules/user";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { user } = ownProps;
-    console.log(`[@////////////${user.id}user/////////////]`)
-    console.log(user)
-    console.log(`[#////////////${user.id}user/////////////]`)
     return {
         handleClick: () => {
             if (user.following) {

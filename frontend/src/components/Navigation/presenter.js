@@ -38,7 +38,7 @@ const Navigation = (props, context) => (
                     <span onClick={props.openNotification}>
                         <Ionicon icon="ios-heart-outline" fontSize="28px" color="black" />
                     </span>
-                    {props.notification ? (<Notification />): null}
+                    {props.notification ? (<Notification openNotification={props.openNotification} />): null}
                 </div>
                 <div className={styles.navIcon}>
                     <Link to="/profile">

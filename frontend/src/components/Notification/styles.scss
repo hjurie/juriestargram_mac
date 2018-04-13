@@ -1,13 +1,43 @@
 .contents-wrap {
     position: relative;
+    &::before {
+        display: block;
+        position: absolute;
+        content:"";
+        background: #fff;
+        border: 1px solid #e6e6e6;
+        -webkit-box-shadow: 0 0 5px 1px rgba(0,0,0,.0975);
+        box-shadow: 0 0 5px 1px rgba(0,0,0,.0975);
+        height: 14px;
+        left: 6px;
+        top: 3px;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        width: 14px;
+        z-index: 1;
+    }
+    &::after {
+        position: absolute;
+        content:"";
+        border-color: transparent transparent #fff;
+        border-style: solid;
+        border-width: 0 10px 10px;
+        height: 0;
+        top: 1px;
+        left: 4px;
+        width: 0;
+        z-index: 12;
+    }
     .pop-wrap {
         display: flex;
         position: absolute;
+        top: 10px;
         right: -60px;
         width: $max-notifi-width;
         max-height: 362px;
         justify-content: center;
         overflow-y: auto;
+        z-index: 2;
         @include boxBorder(yes);
         .loading {
             display: flex;

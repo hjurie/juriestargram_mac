@@ -45,8 +45,7 @@ class Container extends Component {
 
     _openNotification = () => {
         const { notification } = this.state;
-        console.log('notification')
-        console.log(notification)
+        
         if(notification){
             this.setState({
                 notification: false

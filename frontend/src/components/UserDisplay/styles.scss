@@ -26,9 +26,16 @@
     }
     .notification {
       margin-left: 10px;
-      font-size: 12px;
+      font-size: 14px;
       strong {
         font-weight: bold;
+      }
+      .notiText {
+        margin-right: 10px;
+      }
+      .timeStamp {
+        display: inline-block;
+        color: $dark-grey;
       }
     }
     .bigAvatar {
@@ -44,6 +51,11 @@
     .button {
       min-width: 67px;
       @include blueButton();
+    }
+    .thumnail {
+      margin-left: 10px;
+      width: 40px;
+      height: 40px;
     }
   }
 }

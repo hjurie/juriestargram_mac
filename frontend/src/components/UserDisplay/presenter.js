@@ -13,18 +13,27 @@ const UserDisplay = (props, context) => (
             />
             {props.notifiList ? (
                 <div className={styles.notification}>
-                    {props.notifiList.notification_type === "comment" && (
-                        <div>코멘트 자리</div>
-                    )}
-                    {props.notifiList.notification_type === "follow" && (
-                        <div>
-                            <strong>{props.user.username}</strong> 
-                            {context.t("님이 팔로우하기 시작했습니다.")}
-                        </div>
-                    )}
-                    {props.notifiList.notification_type === "like" && (
-                        <div>좋아요 자리</div>
-                    )}
+                    <span className={styles.notiText}>
+                        {props.notifiList.notification_type === "like" && (
+                            <RenderLike 
+                                username={props.user.username} 
+                            />
+                        )}
+                        {props.notifiList.notification_type === "comment" && (
+                            <RenderComment 
+                                username={props.user.username} 
+                                comment={props.notifiList.comment} 
+                            />
+                        )}
+                        {props.notifiList.notification_type === "follow" && (
+                            <RenderFollow 
+                                username={props.user.username} 
+                            />
+                        )}
+                    </span>
+                    <span className={styles.timeStamp}>
+                        {props.notifiList.natural_time}
+                    </span>
                 </div>
             ):(
                 <div className={styles.user}>
@@ -33,13 +42,44 @@ const UserDisplay = (props, context) => (
                 </div>
             )}
         </div>
-        <span className={styles.column} onClick={props.handleClick}>
-                <button className={styles.button}>
-                   {props.user.following ? context.t("언팔로우") : context.t("팔로우")}
-                </button>
-        </span>
+        <div className={styles.column}>
+            {props.notifiList && (props.notifiList.notification_type !== "follow") ? (
+                <span className={styles.column}>
+                    <img src={props.notifiList.image.file} alt="" className={styles.thumnail} />
+                </span>
+            ) : (
+                <span className={styles.column} onClick={props.handleClick}>
+                    <button className={styles.button}>
+                        {props.user.following ? context.t("언팔로우") : context.t("팔로우")}
+                    </button>
+                </span>
+            )}
+        </div>
     </div>
 );
+
+
+
+const RenderLike = (props, context) => (
+    <span>
+        <strong>{props.username}</strong>
+        <span>{context.t("님이 회원님의 사진을 좋아합니다.")}</span>
+    </span>
+)
+
+const RenderComment = (props, context) => (
+    <span>
+        <strong>{props.username}</strong>
+        <span>{context.t("님이 댓글을 남겼습니다")}: {props.comment}</span>
+    </span>
+)
+
+const RenderFollow = (props, context) => (
+    <span>
+        <strong>{props.username}</strong>
+        <span>{context.t("님이 팔로우하기 시작했습니다.")}</span>
+    </span>
+)
 
 
 UserDisplay.propTypes = {
@@ -52,10 +92,8 @@ UserDisplay.propTypes = {
 
     }).isRequired,
     notifiList: PropTypes.shape({
-        to: PropTypes.string.isRequired,
-        notification_type: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        comment: PropTypes.string.isRequired,
+        to: PropTypes.number.isRequired,
+        notification_type: PropTypes.string.isRequired
     }).isRequired,
     big: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired
@@ -68,6 +106,38 @@ UserDisplay.contextTypes = {
 UserDisplay.defaultProps = {
     big: false
 }
+
+
+RenderLike.propTypes = {
+    username: PropTypes.string.isRequired
+}
+
+RenderComment.propTypes = {
+    username: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired
+}
+
+RenderFollow.propTypes = {
+    username: PropTypes.string.isRequired
+}
+
+
+
+RenderLike.contextTypes = {
+    t: PropTypes.func.isRequired
+}
+
+RenderComment.contextTypes = {
+    t: PropTypes.func.isRequired
+}
+
+RenderFollow.contextTypes = {
+    t: PropTypes.func.isRequired
+}
+
+
+
+
 
 
 export default UserDisplay;
