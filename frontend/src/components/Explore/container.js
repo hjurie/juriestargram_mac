@@ -19,6 +19,7 @@ class Container extends Component {
             this.setState({
                 loading: false
             })
+            getExplore();
         }
     }
     componentWillReceiveProps = (nextProps) => {

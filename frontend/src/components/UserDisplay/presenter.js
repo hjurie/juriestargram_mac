@@ -85,15 +85,10 @@ const RenderFollow = (props, context) => (
 UserDisplay.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        profile_image: PropTypes.string.isRequired,
         username: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         following: PropTypes.bool.isRequired
 
-    }).isRequired,
-    notifiList: PropTypes.shape({
-        to: PropTypes.number.isRequired,
-        notification_type: PropTypes.string.isRequired
     }).isRequired,
     big: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired
