@@ -8,6 +8,7 @@ import Footer from 'components/Footer';
 import Feed from "components/Feed";
 import Explore from "components/Explore";
 import Search from "components/Search";
+import UserProfile from "components/UserProfile";
 
 
 const App = props => [
@@ -26,6 +27,7 @@ const PriveateRoutes = props => (
     <Switch>
         <Route key="1" exact path="/" component={Feed} />
         <Route key="2" exact path="/explore" component={Explore} />
+        <Route key="3" exact path="/profile" component={UserProfile} />
         <Route path="/search/:searchTerm" component={Search} />
     </Switch>
 )

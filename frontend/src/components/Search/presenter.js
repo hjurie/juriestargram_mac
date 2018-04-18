@@ -10,7 +10,7 @@ const Search = (props, context) => {
     return (
         <div className={styles.search}>
             <div className={styles.section}>
-                <h4 className={styles.title}>{context.t("Users")}</h4>
+                <h4 className={styles.title}>{context.t("사람 찾기")}</h4>
                 {props.loading && <Loading />}
                 {!props.loading &&
                     props.userList.length < 1 && (
@@ -24,7 +24,7 @@ const Search = (props, context) => {
                 </div>
             </div>
             <div className={styles.section}>
-                <h4 className={styles.title}>{context.t("Photos")}</h4>
+                <h4 className={styles.title}>{context.t("둘러보기")}</h4>
                 {props.loading && <Loading />}
                 {!props.loading &&
                     props.imageList.length < 1 && (

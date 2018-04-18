@@ -1,5 +1,5 @@
 // imports
-import { union } from 'lodash';
+import _ from 'lodash';
 // actions
 
 const SAVE_TOKEN = "SAVE_TOKEN";
@@ -235,7 +235,7 @@ function getExplore() {
             .then(json => {
                 console.log("getExplore")
                 console.log(json)
-                const trueUserList = union.keyBy(json, json.id)
+                const trueUserList = _.keyBy(json, function(o){return o.id})
                 console.log(trueUserList)
                 console.log("로대쉬")
                 if (user.userList) {
@@ -403,10 +403,7 @@ function applyFollowUser(state, action) {
             if (notifi.creator.id === userId) {
                 return { ...notifi, 
                     creator: { 
-                        id: notifi.creator.id, 
-                        name: notifi.creator.name,
-                        username: notifi.creator.username,
-                        profile_image: notifi.creator.profile_image,
+                        ...notifi.creator,
                         following:  true 
                     } 
                 }
@@ -438,10 +435,7 @@ function applyUnfollowUser(state, action) {
                 return {
                     ...notifi,
                     creator: {
-                        id: notifi.creator.id,
-                        name: notifi.creator.name,
-                        username: notifi.creator.username,
-                        profile_image: notifi.creator.profile_image,
+                        ...notifi.creator,
                         following: false
                     }
                 }
@@ -479,18 +473,24 @@ function applyAddUserList(state, action) {
     console.log("추가state")
     console.log(userList)
     // const addList = userList.map(list => {
-    //     if (prevUserList === list) {
-    //         console.log("걸리는")
-    //         console.log(list)
-    //         userList.delete(list)
-    //         return { ...list }
-    //     }
+    //     console.log("prevUserList.id")
+    //     console.log(prevUserList.id)
+    //     prevUserList.map(preList => {
+    //         if(preList.id === list.id){
+    //             list.delete(list);
+    //             return { ...list }
+    //         }
+    //     })
     // })
     // console.log(addList)
 
     return {
         ...state,
-        userList: [...userList]
+        // userList: [
+        //     ...state.userList,
+        //     addList
+        // ]
+        userList
     }
 }
 

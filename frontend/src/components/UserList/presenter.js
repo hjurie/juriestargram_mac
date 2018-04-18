@@ -7,8 +7,8 @@ import UserDisplay from "components/UserDisplay";
 
 
 const UserList = props => (
-    <div className={styles.container}>
-        <div className={styles.box}>
+    <div data-view="true" className={styles.container}>
+        <div ref={props.ref} className={styles.box}>
             <header className={styles.header}>
                 <h4 className={styles.title}>{props.title}</h4>
                 <span className={styles.close} onClick={props.closeLikes}>
@@ -25,7 +25,7 @@ const UserList = props => (
 
 
 const RenderUsers = props => 
-    props.list.map(user => <UserDisplay user={user} key={user.id} /> )
+    props.list.map(user => <UserDisplay big={false} horizontal={true} user={user} key={user.id} /> )
 
 
 

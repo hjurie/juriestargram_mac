@@ -69,7 +69,7 @@ class Container extends Component {
 
     render() {
         const { notifiList } = this.props;
-        console.log(notifiList);
+
         return (
             <div data-view="true" ref={this.setWrapperRef}>
                 <Notification {...this.state} notifiList={notifiList} />
