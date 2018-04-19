@@ -26,13 +26,13 @@ const UserProfile = (props, context) => (
                 <div className={styles.addInfo}>
                     <h1>풀네임</h1>
                     <span>간단한 자기소개</span>
-                    <p>최근 활동내역 한줄 영역</p>
+                    <p><b>elegance_kwon</b>님이 팔로우합니다</p>
                 </div>
             </div>
         </div>
         <div className={styles.contents}>
             <div className={styles.tab}>
-                <button type="button">{context.t("게시물")}</button>
+                <button type="button" className={styles.active}>{context.t("게시물")}</button>
                 <button type="button">{context.t("저장됨")}</button>
             </div>
             <div className={styles.contentsArea}>

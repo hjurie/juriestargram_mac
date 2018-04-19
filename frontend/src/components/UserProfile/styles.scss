@@ -1,0 +1,109 @@
+.wrap {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: $max-page-width;
+    .header {
+        display: flex;
+        margin-bottom: 44px;
+        .photo {
+            flex-grow: 1;
+            text-align: center;
+            img {
+                width: 152px;
+                height :152px;
+                border-radius: 100px;
+                border: 1px solid rgba(0,0,0, .1);
+            }
+        }
+        .user-wrap {
+            flex-grow: 2;
+            font-size: 16px;
+            .setup {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                h1 {
+                    flex-shrink: 1;
+                    font-size: 32px;
+                    line-height: 40px;
+                    font-weight: 200;
+                }
+                a {
+                    display: block;
+                    flex-shrink: 0;
+                    margin-left: 20px;
+                    padding: 0 20px; 
+                    height: 26px;
+                    line-height: 26px;
+                    border: 1px solid #dbdbdb;
+                    font-weight: bold;
+                }
+                span {
+                    display: block;
+                    margin-left: 10px;
+                }
+            }
+            .info {
+                display: flex;
+                margin-bottom: 20px;
+                span {
+                    margin-right: 40px;
+                    b {
+                        font-weight: bold;
+                    }
+                }
+            }
+            .addInfo {
+                h1 {
+                    display: inline-block;
+                    margin-right: 5px;
+                    font-weight: bold;
+                }
+                span {
+                    display: inline-block;
+                }
+                p {
+                    margin-top: 14px; 
+                    color: $dark-grey;
+                    font-size: 12px;
+                    b {
+                        color: $deep-black;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    .contents {
+        .tab {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid $light-grey;
+            button {
+                position: relative;
+                top: -1px;
+                height: 53px;
+                color: $dark-grey;
+                font-size: 12px;
+                font-weight: bold;
+                border-top: 1px solid transparent;
+                background: none;
+                border: 0 none;
+                overflow: visible;
+                cursor: pointer;
+                &:first-child {
+                    margin-right: 40px;
+                }
+                &.active {
+                    color: $deep-black;
+                    border-top: 1px solid $deep-black;
+                }
+                &:focus{
+                    /* outline: #000 dotted 1px !important; 
+                    outline-offset: -1px;  */ 
+                    outline: 0 none;
+                }
+            }
+        }
+    }
+}
