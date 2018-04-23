@@ -30,7 +30,7 @@ const Navigation = (props, context) => (
             </div>
             <div className={styles.column}>
                 <div className={styles.navIcon}>
-                    <Link to="/explore">
+                    <Link to="/explore/">
                         <Ionicon icon="ios-compass-outline" fontSize="28px" color="black" />
                     </Link>
                 </div>
@@ -41,7 +41,7 @@ const Navigation = (props, context) => (
                     {props.notification ? (<Notification openNotification={props.openNotification} />): null}
                 </div>
                 <div className={styles.navIcon}>
-                    <Link to="/profile">
+                    <Link to={props.username ? (`/${props.username}`):(null)}>
                         <Ionicon icon="ios-person-outline" fontSize="32px" color="black" />
                     </Link>
                 </div>

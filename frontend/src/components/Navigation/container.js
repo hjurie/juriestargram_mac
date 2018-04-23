@@ -8,9 +8,13 @@ class Container extends Component {
         notification: false
     };
     static propTypes = {
-        goToSearch: PropTypes.func.isRequired
+        goToSearch: PropTypes.func.isRequired,
+        username: PropTypes.string.isRequired
     };
     render() {
+        console.log("nav")
+        console.log(this.props)
+        console.log("nav")
         return ( 
             <Navigation 
                 {...this.state}
@@ -19,6 +23,7 @@ class Container extends Component {
                 openNotification={this._openNotification}
                 value={this.state.term}
                 notification={this.state.notification}
+                username={this.props.username}
             />
         )
     }

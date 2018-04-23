@@ -47,7 +47,7 @@ class Container extends Component {
     */
     handleClickOutside(event) {
         const { closeLikes } = this.props;
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) || event.target.getAttributeNode('data-view')) {
+        if ((this.wrapperRef && !this.wrapperRef.contains(event.target)) || event.target.getAttributeNode('data-view')) {
             closeLikes()
         }
     }

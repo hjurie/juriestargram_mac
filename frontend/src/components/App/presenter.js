@@ -14,20 +14,21 @@ import UserProfile from "components/UserProfile";
 const App = props => [
     // Nav,
     // Routes,
-    props.isLoggedIn ? <Navigation key={1} /> : null,
+    props.isLoggedIn ? <Navigation key={1} username={props.username} /> : null,
     props.isLoggedIn ? <PriveateRoutes key={2} /> : <PublicRoutes key={2} />,
     <Footer key={3} />
 ]
 
 App.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired
 }
 
 const PriveateRoutes = props => (
     <Switch>
         <Route key="1" exact path="/" component={Feed} />
-        <Route key="2" exact path="/explore" component={Explore} />
-        <Route key="3" exact path="/profile" component={UserProfile} />
+        <Route key="2" exact path="/explore/" component={Explore} />
+        <Route key="3" exact path="/:username" component={UserProfile} />
         <Route path="/search/:searchTerm" component={Search} />
     </Switch>
 )

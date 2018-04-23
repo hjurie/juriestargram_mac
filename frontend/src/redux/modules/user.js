@@ -10,13 +10,15 @@ const UNFOLLOW_USER = "UNFOLLOW_USER";
 const SET_IMAGE_LIST = "SET_IMAGE_LIST";
 const SET_NOTIFI_LIST = "SET_NOTIFI_LIST";
 const ADD_USER_LIST = "ADD_USER_LIST";
+const USER_PROFILE = "USER_PROFILE";
 
 // action creators
 
-function saveToken(token) {
+function saveToken(token, username) {
     return {
         type: SAVE_TOKEN,
-        token
+        token,
+        username
     }
 }
 
@@ -41,6 +43,12 @@ function setUnfollowUser(userId) {
     };
 }
 
+function setUserProfile(userProfile){
+    return {
+        type: USER_PROFILE,
+        userProfile
+    }
+}
 
 function setUserList(userList) {
     return {
@@ -84,13 +92,13 @@ function facebookLogin(access_token) {
                 access_token: access_token
             })
         })
-            .then(response => response.json())
-            .then(json => {
-                if (json.token) {
-                    dispatch(saveToken(json.token));
-                }
-            })
-            .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(json => {
+            if (json.token) {
+                dispatch(saveToken(json.token, json.user.username));
+            }
+        })
+        .catch(err => console.log(err));
     };
 }
 
@@ -106,13 +114,13 @@ function usernameLogin(username, password) {
                 password
             })
         })
-            .then(response => response.json())
-            .then(json => {
-                if (json.token) {
-                    dispatch(saveToken(json.token));
-                }
-            })
-            .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(json => {
+            if (json.token) {
+                dispatch(saveToken(json.token, json.user.username));
+            }
+        })
+        .catch(err => console.log(err));
     };
 }
 
@@ -131,13 +139,13 @@ function createAccount(username, password, email, name) {
                 name
             })
         })
-            .then(response => response.json())
-            .then(json => {
-                if (json.token) {
-                    dispatch(saveToken(json.token));
-                }
-            })
-            .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(json => {
+            if (json.token) {
+                dispatch(saveToken(json.token));
+            }
+        })
+        .catch(err => console.log(err));
     };
 }
 
@@ -149,15 +157,15 @@ function getPhotoLikes(photoId) {
                 Authorization: `JWT ${token}`
             }
         })
-            .then(response => {
-                if (response.status === 401) {
-                    dispatch(logout());
-                }
-                return response.json();
-            })
-            .then(json => {
-                dispatch(setUserList(json));
-            })
+        .then(response => {
+            if (response.status === 401) {
+                dispatch(logout());
+            }
+            return response.json();
+        })
+        .then(json => {
+            dispatch(setUserList(json));
+        })
     }
 };
 
@@ -214,6 +222,36 @@ function unfollowUser(userId) {
     };
 }
 
+function userByTerm(userTerm) {
+    return async (dispatch, getState) => {
+        const { user: { token } } = getState();
+        const userProfile = await getProfile(token, userTerm);
+        // const imageList = await searchImages(token, searchTerm);
+        // if (userList === 401 || imageList === 401) {
+        //     dispatch(logout());
+        // }
+        dispatch(setUserProfile(userProfile));
+        // dispatch(setImageList(imageList));
+    }
+}
+
+function getProfile(token, userTerm) {
+    console.log(userTerm)
+    return fetch(`/users/${userTerm}/`, {
+        headers: {
+            Authorization: `JWT ${token}`,
+        }
+    })
+    .then(response => {
+        if (response.status === 401) {
+            return 401
+        }
+        console.log(response)
+        return response.json()
+    })
+    .then(json => json)
+    .catch(err => console.log(err));
+}
 
 function getExplore() {
     return (dispatch, getState) => {
@@ -226,26 +264,26 @@ function getExplore() {
                 "Content-Type": "application/json"
             }
         })
-            .then(response => {
-                if (response.status === 401) {
-                    dispatch(logout());
-                }
-                return response.json()
-            })
-            .then(json => {
-                console.log("getExplore")
-                console.log(json)
-                const trueUserList = _.keyBy(json, function(o){return o.id})
-                console.log(trueUserList)
-                console.log("로대쉬")
-                if (user.userList) {
-                    console.log('여기들어올텐데')
-                    dispatch(addUserList(json))
-                }
-                else {
-                    dispatch(setUserList(json))
-                }
-            })
+        .then(response => {
+            if (response.status === 401) {
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            console.log("getExplore")
+            console.log(json)
+            const trueUserList = _.keyBy(json, function(o){return o.id})
+            console.log(trueUserList)
+            console.log("로대쉬")
+            if (user.userList) {
+                console.log('여기들어올텐데')
+                dispatch(addUserList(json))
+            }
+            else {
+                dispatch(setUserList(json))
+            }
+        })
     };
 }
 
@@ -260,26 +298,26 @@ function getNotification() {
                 "Content-Type": "application/json"
             }
         })
-            .then(response => {
-                console.log(response)
-                if (response.status === 401) {
-                    dispatch(logout());
-                }
-                return response.json()
-            })
-            .then(json => {
-                dispatch(setNotification(json))
-                if (!user.userList) {
-                    const userList = json.map(notifiList => {
-                        if (notifiList.notification_type === "follow") {
+        .then(response => {
+            console.log(response)
+            if (response.status === 401) {
+                dispatch(logout());
+            }
+            return response.json()
+        })
+        .then(json => {
+            dispatch(setNotification(json))
+            if (!user.userList) {
+                const userList = json.map(notifiList => {
+                    if (notifiList.notification_type === "follow") {
 
-                            return { ...notifiList.creator };
-                        }
-                        return undefined
-                    }).filter(n => { return n !== undefined });
-                    dispatch(setUserList(userList))
-                }
-            })
+                        return { ...notifiList.creator };
+                    }
+                    return undefined
+                }).filter(n => { return n !== undefined });
+                dispatch(setUserList(userList))
+            }
+        })
     }
 }
 
@@ -302,13 +340,13 @@ function searchUsers(token, searchTerm) {
             Authorization: `JWT ${token}`,
         }
     })
-        .then(response => {
-            if (response.status === 401) {
-                return 401
-            }
-            return response.json()
-        })
-        .then(json => json);
+    .then(response => {
+        if (response.status === 401) {
+            return 401
+        }
+        return response.json()
+    })
+    .then(json => json);
 }
 
 
@@ -318,13 +356,13 @@ function searchImages(token, searchTerm) {
             Authorization: `JWT ${token}`,
         }
     })
-        .then(response => {
-            if (response.status === 401) {
-                return 401
-            }
-            return response.json()
-        })
-        .then(json => json);
+    .then(response => {
+        if (response.status === 401) {
+            return 401
+        }
+        return response.json()
+    })
+    .then(json => json);
 }
 
 
@@ -332,7 +370,8 @@ function searchImages(token, searchTerm) {
 // initial state
 const initialState = {
     isLoggedIn: localStorage.getItem("jwt") ? true : false,
-    token: localStorage.getItem("jwt")
+    token: localStorage.getItem("jwt"),
+    username: localStorage.getItem("username")
 };
 
 
@@ -355,6 +394,8 @@ function reducer(state = initialState, action) {
             return applySetNotifiList(state, action);
         case ADD_USER_LIST:
             return applyAddUserList(state, action);
+        case USER_PROFILE:
+            return applyUserProfile(state, action);
         default:
             return state;
     }
@@ -365,16 +406,22 @@ function reducer(state = initialState, action) {
 
 function applySetToken(state, action) {
     const { token } = action;
+    const { username } = action;
+    console.log(action)
+    console.log("token")
     localStorage.setItem("jwt", token);
+    localStorage.setItem("username", username);
     return {
         ...state,
         isLoggedIn: true,
-        token
+        token,
+        username
     }
 }
 
 function applyLogout(state, action) {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("username");
     return {
         isLoggedIn: false
     }
@@ -450,6 +497,15 @@ function applyUnfollowUser(state, action) {
     }
 }
 
+function applyUserProfile(state, action) {
+    const { userProfile } = action;
+    return {
+        ...state,
+        userProfile
+    }
+
+}
+
 function applySetImageList(state, action) {
     const { imageList } = action;
     return {
@@ -507,7 +563,8 @@ const actionCreators = {
     unfollowUser,
     getExplore,
     getNotification,
-    searchByTerm
+    searchByTerm,
+    userByTerm
 };
 
 export { actionCreators };
