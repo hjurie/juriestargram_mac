@@ -9,6 +9,7 @@ class Container extends Component {
     };
     static propTypes = {
         userByTerm: PropTypes.func.isRequired,
+        username: PropTypes.string.isRequired,
         userProfile: PropTypes.shape({
             profile_image: PropTypes.string.isRequired,
             username: PropTypes.string.isRequired,
@@ -43,10 +44,10 @@ class Container extends Component {
     }
 
     render() {
-        const { userProfile } = this.props;
+        const { userProfile, username } = this.props;
         console.log(this.props)
         console.log("container userProfile")
-        return <UserPropfile {...this.state} userProfile = {userProfile} />
+        return <UserPropfile {...this.state} me={username} userProfile={userProfile} />
     }
 }
 

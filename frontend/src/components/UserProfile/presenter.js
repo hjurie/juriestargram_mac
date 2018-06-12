@@ -1,8 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Ionicon from "react-ionicons";
+import styled, { injectGlobal }from "styled-components";
 import styles from "./styles.scss";
 import Loading from "components/Loading";
+
+injectGlobal`
+
+`
 
 
 const UserProfile = (props, context) => {
@@ -15,7 +20,7 @@ const UserProfile = (props, context) => {
             )}
         {!props.loading &&
             props.userProfile && (
-                <RenderUser userProfile={props.userProfile} />
+                <RenderUser me={props.me} userProfile={props.userProfile} />
             )}
     </div>)
 }
@@ -34,10 +39,10 @@ const RenderUser = (props, context) => {
                 <div className={styles.userWrap}>
                     <div className={styles.setup}>
                         <h1>{props.userProfile.username}</h1>
-                        <a>{context.t("프로필 편집")}</a>
-                        <span>
-                            <Ionicon icon="ios-settings" fontSize="28px" color="black" />
-                        </span>
+                        {props.userProfile.username === props.me ? 
+                            (<OptionMe />) : 
+                            (<OptionThem />) 
+                        }
                     </div>
                     <div className={styles.info}>
                         <span>{context.t("게시물")} <b>{props.userProfile.post_count}</b></span>
@@ -65,6 +70,28 @@ const RenderUser = (props, context) => {
 
 const NotFound = props => <span className={styles.notFound}>{props.text}</span>;
 
+const OptionMe = (props, context) => {
+    return (
+        <span className={styles.option}>
+            <a>{context.t("프로필 편집")}</a>
+            <span>
+                <Ionicon icon="ios-settings" fontSize="28px" color="black" />
+            </span>
+        </span>
+    )
+};
+const OptionThem = (props, context) => {
+    return (
+        <span className={styles.option}>
+            <a>{context.t("팔로우")}</a>
+            <span>
+                <Ionicon icon="ios-settings" fontSize="28px" color="black" />
+            </span>
+        </span>
+    )
+};
+
+
 UserProfile.contextTypes = {
     t: PropTypes.func.isRequired
 }
@@ -73,6 +100,12 @@ RenderUser.contextTypes = {
     t: PropTypes.func.isRequired
 }
 
+OptionMe.contextTypes = {
+    t: PropTypes.func.isRequired
+}
 
+OptionThem.contextTypes = {
+    t: PropTypes.func.isRequired
+}
 
 export default UserProfile;

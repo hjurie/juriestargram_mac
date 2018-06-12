@@ -3,8 +3,9 @@ import { actionCreators as userActions } from "redux/modules/user.js";
 import Container from "./container";
 
 const mapStateToProps = (state, ownProps) => {
-    const { user: { userProfile } } = state;
+    const { user: { userProfile, username } } = state;
     return {
+        username,
         userProfile
     }
 }
